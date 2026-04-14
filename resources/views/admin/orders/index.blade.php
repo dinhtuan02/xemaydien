@@ -4,6 +4,23 @@
 @section('page-title', 'Quản lý đơn hàng')
 
 @section('content')
+<form class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" name="keyword" value="{{ request('keyword') }}" class="form-control" placeholder="Tìm đơn hàng">
+    </div>
+
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">Tất cả</option>
+            <option value="pending">Chờ</option>
+            <option value="completed">Hoàn thành</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">Lọc</button>
+    </div>
+</form>
 <div class="card border-0 shadow-sm">
     <div class="table-responsive">
         <table class="table mb-0">

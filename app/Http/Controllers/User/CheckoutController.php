@@ -122,4 +122,89 @@ class CheckoutController extends Controller
 
         return view('user.checkout.success', compact('order'));
     }
+
+    public function buyNow(\Illuminate\Http\Request $request, \App\Models\Product $product)
+    {
+        $quantity = max(1, (int) $request->input('quantity', 1));
+
+        if (!$product->is_active || $product->quantity < 1) {
+            return back()->with('error', 'Sản phẩm hiện không khả dụng.');
+        }
+
+        if ($quantity > $product->quantity) {
+            return back()->with('error', 'Số lượng vượt quá tồn kho.');
+        }
+
+        return view('user.checkout.buy-now', compact('product', 'quantity'));
+    }
+
+    public function processBuyNow(\App\Http\Requests\User\CheckoutRequest $request, \App\Models\Product $product)
+    {
+        $quantity = max(1, (int) $request->input('quantity', 1));
+
+        if (!$product->is_active || $product->quantity < 1) {
+            return back()->with('error', 'Sản phẩm hiện không khả dụng.');
+        }
+
+        if ($quantity > $product->quantity) {
+            return back()->with('error', 'Số lượng vượt quá tồn kho.');
+        }
+
+        \Illuminate\Support\Facades\DB::beginTransaction();
+
+        try {
+            $subtotal = $product->final_price * $quantity;
+            $shippingFee = 0;
+            $discountAmount = 0;
+            $totalAmount = $subtotal + $shippingFee - $discountAmount;
+
+            $order = \App\Models\Order::create([
+                'order_code' => 'ORD-' . strtoupper(\Illuminate\Support\Str::random(8)),
+                'user_id' => auth()->id(),
+                'customer_name' => $request->customer_name,
+                'customer_phone' => $request->customer_phone,
+                'customer_address' => $request->customer_address,
+                'note' => $request->note,
+                'payment_method' => $request->payment_method,
+                'status' => \App\Models\Order::STATUS_PENDING,
+                'subtotal' => $subtotal,
+                'shipping_fee' => $shippingFee,
+                'discount_amount' => $discountAmount,
+                'total_amount' => $totalAmount,
+                'ordered_at' => now(),
+            ]);
+
+            \App\Models\OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+                'product_thumbnail' => $product->thumbnail,
+                'price' => $product->final_price,
+                'quantity' => $quantity,
+                'total' => $subtotal,
+            ]);
+
+            $product->decrement('quantity', $quantity);
+            $product->increment('sold_count', $quantity);
+
+            \App\Models\Payment::create([
+                'order_id' => $order->id,
+                'transaction_code' => null,
+                'payment_method' => $request->payment_method,
+                'payment_status' => 'unpaid',
+                'amount' => $totalAmount,
+                'paid_at' => null,
+                'payment_note' => null,
+            ]);
+
+            \Illuminate\Support\Facades\DB::commit();
+
+            return redirect()->route('checkout.success', $order->id);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\DB::rollBack();
+            report($e);
+
+            return back()->with('error', 'Không thể tạo đơn hàng. Vui lòng thử lại.');
+        }
+    }
 }

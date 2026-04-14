@@ -93,3 +93,42 @@ function initConfirmLinks() {
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const qtyInput = document.getElementById('productQuantity');
+    const addToCartQty = document.getElementById('addToCartQty');
+    const buyNowQty = document.getElementById('buyNowQty');
+
+    if (qtyInput && addToCartQty && buyNowQty) {
+        const syncQty = () => {
+            let value = parseInt(qtyInput.value || 1, 10);
+            if (value < 1) value = 1;
+            qtyInput.value = value;
+            addToCartQty.value = value;
+            buyNowQty.value = value;
+        };
+
+        qtyInput.addEventListener('input', syncQty);
+
+        const minusBtn = document.querySelector('.qty-minus');
+        const plusBtn = document.querySelector('.qty-plus');
+
+        if (minusBtn) {
+            minusBtn.addEventListener('click', function () {
+                let value = parseInt(qtyInput.value || 1, 10);
+                qtyInput.value = Math.max(1, value - 1);
+                syncQty();
+            });
+        }
+
+        if (plusBtn) {
+            plusBtn.addEventListener('click', function () {
+                let value = parseInt(qtyInput.value || 1, 10);
+                qtyInput.value = value + 1;
+                syncQty();
+            });
+        }
+
+        syncQty();
+    }
+});

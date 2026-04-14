@@ -6,10 +6,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card border-0 shadow-sm mb-3">
-            <img id="mainProductImage"
-                 src="{{ $product->thumbnail ? asset('storage/' . $product->thumbnail) : asset('assets/images/no-image.png') }}"
-                 class="img-fluid rounded"
-                 alt="{{ $product->name }}">
+            <img src="{{ $product->thumbnail_url }}" class="rounded" alt="{{ $product->name }}">
         </div>
 
         <div class="d-flex gap-2 flex-wrap">
@@ -44,20 +41,27 @@
 
         <p>{{ $product->short_description }}</p>
 
-        <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mb-3">
-            @csrf
-
+        <div class="mb-3">
             <div class="d-flex align-items-center gap-3 flex-wrap">
                 <div class="qty-wrapper d-flex align-items-center">
                     <button type="button" class="btn btn-outline-secondary qty-minus">-</button>
-                    <input type="number" name="quantity" value="1" min="1" class="form-control qty-input mx-2" style="width: 80px;">
+                    <input type="number" id="productQuantity" value="1" min="1" class="form-control qty-input mx-2" style="width: 80px;">
                     <button type="button" class="btn btn-outline-secondary qty-plus">+</button>
                 </div>
 
-                <button class="btn btn-primary">Thêm vào giỏ hàng</button>
-                <a href="{{ route('checkout.index') }}" class="btn btn-danger">Mua ngay</a>
+                <form action="{{ route('cart.add', $product->id) }}" method="POST" id="addToCartForm" class="m-0">
+                    @csrf
+                    <input type="hidden" name="quantity" id="addToCartQty" value="1">
+                    <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+                </form>
+
+                <form action="{{ route('checkout.buy-now', $product->id) }}" method="POST" id="buyNowForm" class="m-0">
+                    @csrf
+                    <input type="hidden" name="quantity" id="buyNowQty" value="1">
+                    <button type="submit" class="btn btn-danger">Mua ngay</button>
+                </form>
             </div>
-        </form>
+        </div>
 
         <hr>
 

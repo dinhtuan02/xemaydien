@@ -22,7 +22,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <img src="{{ $product->thumbnail ? asset('storage/' . $product->thumbnail) : asset('assets/images/no-image.png') }}">
+                                <img src="{{ $item->product->thumbnail_url }}" width="70" class="rounded" alt="{{ $item->product->name }}">
                                 <div>
                                     <strong>{{ $item->product->name }}</strong>
                                 </div>

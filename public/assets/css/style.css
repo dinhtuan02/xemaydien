@@ -43,15 +43,135 @@ header .btn {
    BANNER
 ========================= */
 .banner-img {
-    /* height: 420px; */
+    height: 300px;
     object-fit: cover;
-    border-radius: 16px;
+    object-position: center;
+    display: block;
+    width: 100%;
+    background: #eef2f7;
+}
+
+.banner-link {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(8, 15, 32, 0.68) 0%, rgba(8, 15, 32, 0.28) 40%, rgba(8, 15, 32, 0.05) 100%);
+    z-index: 1;
 }
 
 .carousel-caption {
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 14px;
-    padding: 16px 20px;
+    left: 7%;
+    right: auto;
+    bottom: 50%;
+    transform: translateY(50%);
+    z-index: 2;
+    text-align: left;
+    background: transparent;
+    padding: 0;
+    max-width: 520px;
+}
+
+.banner-content {
+    color: #fff;
+}
+
+.banner-content h2 {
+    font-size: 2.1rem;
+    line-height: 1.2;
+}
+
+.banner-content p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+}
+
+.banner-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    backdrop-filter: blur(6px);
+}
+
+#homeBanner .carousel-control-prev,
+#homeBanner .carousel-control-next {
+    width: 7%;
+}
+
+#homeBanner .carousel-control-prev-icon,
+#homeBanner .carousel-control-next-icon {
+    background-size: 60% 60%;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+#homeBanner .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 0;
+    margin: 0 5px;
+}
+
+@media (max-width: 991.98px) {
+    .banner-img {
+        height: 320px;
+    }
+
+    .carousel-caption {
+        left: 6%;
+        right: 6%;
+        bottom: 20px;
+        transform: none;
+        max-width: none;
+    }
+
+    .banner-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .banner-content p {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .banner-img {
+        height: 220px;
+    }
+
+    .carousel-caption {
+        left: 5%;
+        right: 5%;
+        bottom: 16px;
+    }
+
+    .banner-badge,
+    .banner-content p {
+        display: none;
+    }
+
+    .banner-content h2 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    #homeBanner .carousel-control-prev,
+    #homeBanner .carousel-control-next {
+        display: none;
+    }
 }
 
 /* =========================

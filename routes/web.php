@@ -66,6 +66,9 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::post('/my-orders/{order}/cancel', [UserOrderController::class, 'cancel'])->name('orders.cancel');
 
     Route::post('/reviews', [UserReviewController::class, 'store'])->name('reviews.store');
+
+    Route::post('/buy-now/{product}', [CheckoutController::class, 'buyNow'])->name('checkout.buy-now');
+    Route::post('/buy-now/process/{product}', [CheckoutController::class, 'processBuyNow'])->name('checkout.process-buy-now');
 });
 
 // =========================

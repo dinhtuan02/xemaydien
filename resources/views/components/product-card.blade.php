@@ -1,9 +1,7 @@
 <div class="col-md-3 mb-4">
     <div class="card h-100 shadow-sm border-0 product-card">
         <a href="{{ route('products.show', $product->slug) }}">
-            <img src="{{ $product->thumbnail ? asset('storage/' . $product->thumbnail) : asset('assets/images/no-image.png') }}"
-                 class="card-img-top product-thumb"
-                 alt="{{ $product->name }}">
+            <img src="{{ $product->thumbnail_url }}" class="rounded" alt="{{ $product->name }}">
         </a>
 
         <div class="card-body d-flex flex-column">

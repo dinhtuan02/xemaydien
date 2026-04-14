@@ -57,13 +57,7 @@
                 <div class="col-12 mb-3">
                     <label class="form-label">Ảnh đại diện</label>
                     <input type="file" name="thumbnail" class="form-control image-input" data-preview="#thumbPreview">
-                    <img
-                        id="thumbPreview"
-                        src="{{ $product->thumbnail ? asset('storage/' . $product->thumbnail) : '' }}"
-                        class="mt-2 rounded {{ $product->thumbnail ? '' : 'd-none' }}"
-                        width="120"
-                        alt="Thumbnail preview"
-                    >
+                    <img src="{{ $product->thumbnail_url }}" width="120" class="rounded" alt="{{ $product->name }}">
                 </div>
 
                 <div class="col-12 mb-3">
