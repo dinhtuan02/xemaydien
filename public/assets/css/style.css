@@ -1,0 +1,237 @@
+/* =========================
+   RESET + BASE
+========================= */
+body {
+    background: #f6f8fb;
+    color: #1f2937;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    transition: all 0.2s ease;
+}
+
+.nav-link {
+    color: #374151;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #0d6efd;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* =========================
+   HEADER
+========================= */
+header.sticky-top {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+header .form-control {
+    border-radius: 10px;
+}
+
+header .btn {
+    border-radius: 10px;
+}
+
+/* =========================
+   BANNER
+========================= */
+.banner-img {
+    /* height: 420px; */
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 16px 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+    border-radius: 16px;
+}
+
+.product-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.product-thumb {
+    height: 220px;
+    object-fit: cover;
+    background: #fff;
+}
+
+.product-gallery-thumb {
+    transition: all 0.2s ease;
+}
+
+.product-gallery-thumb:hover {
+    border-color: #0d6efd !important;
+    transform: scale(1.05);
+}
+
+/* =========================
+   PRICE + BADGE
+========================= */
+.text-danger.fw-bold {
+    font-size: 18px;
+}
+
+.badge {
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+/* =========================
+   TABLE
+========================= */
+.table {
+    background: #fff;
+}
+
+.table thead th {
+    background: #f3f4f6;
+    border-bottom: none;
+    font-size: 14px;
+    color: #374151;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    box-shadow: 0 6px 18px rgba(13, 110, 253, 0.18);
+}
+
+/* =========================
+   FORMS
+========================= */
+.form-control,
+.form-select,
+textarea {
+    border-radius: 10px !important;
+    border: 1px solid #dbe1ea !important;
+    box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15) !important;
+}
+
+/* =========================
+   CHECKOUT + PROFILE
+========================= */
+.card-body h4,
+.card-body h5 {
+    font-weight: 700;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    margin-top: 60px;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* =========================
+   PAGINATION
+========================= */
+.pagination {
+    gap: 6px;
+}
+
+.page-link {
+    border-radius: 10px !important;
+    border: none;
+    color: #374151;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.page-item.active .page-link {
+    background: #0d6efd;
+}
+
+/* =========================
+   ALERT
+========================= */
+.alert {
+    border: none;
+    border-radius: 12px;
+}
+
+/* =========================
+   CART QTY
+========================= */
+.cart-qty-input {
+    min-width: 70px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 991.98px) {
+    .banner-img {
+        height: 280px;
+    }
+
+    .product-thumb {
+        height: 180px;
+    }
+
+    header .w-50 {
+        width: 100% !important;
+    }
+
+    header .d-flex.align-items-center.justify-content-between.py-3 {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .banner-img {
+        height: 220px;
+    }
+
+    .product-thumb {
+        height: 220px;
+    }
+
+    .carousel-caption {
+        display: none !important;
+    }
+}
