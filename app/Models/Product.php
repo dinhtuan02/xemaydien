@@ -101,4 +101,17 @@ class Product extends Model
             }
         });
     }
+
+    public function getThumbnailUrlAttribute(): string
+    {
+        if (!$this->thumbnail) {
+            return asset('assets/images/no-image.png');
+        }
+
+        if (str_starts_with($this->thumbnail, 'assets/')) {
+            return asset($this->thumbnail);
+        }
+
+        return asset('storage/' . $this->thumbnail);
+    }
 }

@@ -29,7 +29,7 @@
                 @foreach($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
-                        <td><img src="{{ asset($product->thumbnail ?? 'assets/images/no-image.png') }}" width="60" class="rounded"></td>
+                        <td><img src="{{ $product->thumbnail_url }}" width="60" class="rounded" alt="{{ $product->name }}"></td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category->name ?? '' }}</td>
                         <td>{{ $product->brand->name ?? '' }}</td>
