@@ -36,7 +36,7 @@
                         <label class="form-label">Phương thức thanh toán</label>
                         <select name="payment_method" class="form-select">
                             <option value="cod">Thanh toán khi nhận hàng</option>
-                            <option value="bank_transfer">Chuyển khoản</option>
+                            <option value="bank_transfer">Thanh toán online qua VNPay</option>
                         </select>
                     </div>
 

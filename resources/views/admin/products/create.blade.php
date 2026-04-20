@@ -90,22 +90,22 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Thông số 1</label>
+                    <label class="form-label">Thông số 1: Động cơ</label>
                     <input type="text" name="specifications[Động cơ]" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Thông số 2</label>
+                    <label class="form-label">Thông số 2: Pin/Ắc quy</label>
                     <input type="text" name="specifications[Pin/Ắc quy]" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Thông số 3</label>
+                    <label class="form-label">Thông số 3: Tốc độ tối đa</label>
                     <input type="text" name="specifications[Tốc độ tối đa]" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Thông số 4</label>
+                    <label class="form-label">Thông số 4: Quãng đường</label>
                     <input type="text" name="specifications[Quãng đường]" class="form-control">
                 </div>
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReviewController as UserReviewController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\PaymentController;
 
 // Admin Controllers
 use App\Http\Controllers\Admin\DashboardController;
@@ -69,6 +70,21 @@ Route::middleware(['auth', 'active'])->group(function () {
 
     Route::post('/buy-now/{product}', [CheckoutController::class, 'buyNow'])->name('checkout.buy-now');
     Route::post('/buy-now/process/{product}', [CheckoutController::class, 'processBuyNow'])->name('checkout.process-buy-now');
+
+    Route::post('/payment/vnpay/{order}', [PaymentController::class, 'createVNPayPayment'])
+    ->name('payment.vnpay');
+
+    Route::get('/payment/vnpay-return', [PaymentController::class, 'vnpayReturn'])
+        ->name('payment.vnpay-return');
+
+    Route::get('/payment/vnpay/redirect/{order}', [App\Http\Controllers\User\PaymentController::class, 'redirectToVNPay'])
+    ->name('payment.vnpay.redirect');
+
+    Route::post('/payment/vnpay/{order}', [App\Http\Controllers\User\PaymentController::class, 'createVNPayPayment'])
+        ->name('payment.vnpay');
+
+    Route::get('/payment/vnpay-return', [App\Http\Controllers\User\PaymentController::class, 'vnpayReturn'])
+        ->name('payment.vnpay-return');
 });
 
 // =========================

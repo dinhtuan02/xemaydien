@@ -14,9 +14,15 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $brands = Brand::latest()->paginate(10);
+        $query = Brand::latest();
+
+        if ($request->filled('keyword')) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        $brands = $query->paginate(10)->withQueryString();
 
         return view('admin.brands.index', compact('brands'));
     }

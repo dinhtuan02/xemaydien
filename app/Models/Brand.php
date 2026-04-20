@@ -35,4 +35,17 @@ class Brand extends Model
             }
         });
     }
+
+    public function getLogoUrlAttribute(): string
+    {
+        if (!$this->logo) {
+            return asset('assets/images/no-image.png');
+        }
+
+        if (str_starts_with($this->logo, 'assets/')) {
+            return asset($this->logo);
+        }
+
+        return asset('storage/' . $this->logo);
+    }
 }

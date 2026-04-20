@@ -23,7 +23,7 @@ class OrderController extends Controller
     {
         abort_if($order->user_id !== auth()->id(), 403);
 
-        $order->load('details');
+        $order->load('details', 'payment');
 
         return view('user.orders.show', compact('order'));
     }

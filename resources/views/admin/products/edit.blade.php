@@ -60,6 +60,22 @@
                     <img src="{{ $product->thumbnail_url }}" width="120" class="rounded" alt="{{ $product->name }}">
                 </div>
 
+                @if($product->images->count())
+                    <div class="mb-3">
+                        <label class="form-label">Ảnh thư viện hiện tại</label>
+                        <div class="d-flex gap-2 flex-wrap">
+                            @foreach($product->images as $image)
+                                <img src="{{ $image->image_url }}" width="90" class="rounded border">
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                <div class="mb-3">
+                    <label class="form-label">Thêm ảnh thư viện</label>
+                    <input type="file" name="images[]" multiple class="form-control">
+                </div>
+
                 <div class="col-12 mb-3">
                     <label class="form-label">Mô tả ngắn</label>
                     <textarea name="short_description" class="form-control" rows="3">{{ old('short_description', $product->short_description) }}</textarea>

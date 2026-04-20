@@ -21,4 +21,17 @@ class Banner extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getImageUrlAttribute(): string
+    {
+        if (!$this->image) {
+            return asset('assets/images/no-image.png');
+        }
+
+        if (str_starts_with($this->image, 'assets/')) {
+            return asset($this->image);
+        }
+
+        return asset('storage/' . $this->image);
+    }
 }

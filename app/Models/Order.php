@@ -59,4 +59,28 @@ class Order extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return match ($this->status) {
+            self::STATUS_PENDING => 'Chờ xác nhận',
+            self::STATUS_CONFIRMED => 'Đã xác nhận',
+            self::STATUS_SHIPPING => 'Đang giao',
+            self::STATUS_COMPLETED => 'Hoàn thành',
+            self::STATUS_CANCELLED => 'Đã hủy',
+            default => 'Không xác định',
+        };
+    }
+
+    public function getStatusBadgeClassAttribute(): string
+    {
+        return match ($this->status) {
+            self::STATUS_PENDING => 'warning text-dark',
+            self::STATUS_CONFIRMED => 'info text-dark',
+            self::STATUS_SHIPPING => 'primary',
+            self::STATUS_COMPLETED => 'success',
+            self::STATUS_CANCELLED => 'danger',
+            default => 'secondary',
+        };
+    }
 }

@@ -11,7 +11,17 @@
         <p><strong>Người nhận:</strong> {{ $order->customer_name }}</p>
         <p><strong>SĐT:</strong> {{ $order->customer_phone }}</p>
         <p><strong>Địa chỉ:</strong> {{ $order->customer_address }}</p>
-        <p><strong>Trạng thái:</strong> <span class="badge bg-primary">{{ $order->status }}</span></p>
+        <p>
+            <strong>Trạng thái thanh toán:</strong>
+            @if($order->payment)
+                <span class="badge bg-{{ $order->payment->payment_status === 'paid' ? 'success' : ($order->payment->payment_status === 'failed' ? 'danger' : 'warning text-dark') }}">
+                    {{ $order->payment->payment_status }}
+                </span>
+            @else
+                <span class="badge bg-secondary">Chưa tạo thanh toán</span>
+            @endif
+        </p>
+        {{-- <p><strong>Trạng thái:</strong> <span class="badge bg-primary">{{ $order->status }}</span></p> --}}
         <p><strong>Thanh toán:</strong> {{ $order->payment_method }}</p>
     </div>
 </div>
@@ -44,6 +54,15 @@
 <div class="mt-4 text-end">
     <h4>Tổng thanh toán: <span class="text-danger">{{ number_format($order->total_amount) }}đ</span></h4>
 </div>
+
+@if($order->payment_method === 'bank_transfer' && optional($order->payment)->payment_status !== 'paid')
+    <div class="mt-3">
+        <form action="{{ route('payment.vnpay', $order->id) }}" method="POST">
+            @csrf
+            <button class="btn btn-success">Thanh toán online bằng VNPay</button>
+        </form>
+    </div>
+@endif
 
 @if($order->status === 'pending')
     <div class="mt-3">
